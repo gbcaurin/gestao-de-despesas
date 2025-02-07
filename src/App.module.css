@@ -8,12 +8,89 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10rem;
   flex-direction: row;
   height: 6rem;
   border-radius: 10px;
   margin-right: 1rem;
   margin-left: 1rem;
+}
+
+.sections {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+section {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.titleRow h2 {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.titleRow svg {
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.income,
+.expense,
+.total {
+  padding: 1rem;
+}
+
+.incomeContainer,
+.expenseContainer,
+.totalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.incomeItem,
+.expenseItem,
+.totalContainer span {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.incomeItem {
+  color: #28a745;
+}
+
+.expenseItem {
+  color: #dc3545;
+}
+
+.totalContainer span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
 }
 
 .form {
