@@ -1,0 +1,119 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10rem;
+  flex-direction: row;
+  height: 6rem;
+  border-radius: 10px;
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.formControl {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.input {
+  width: 20rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease-in-out;
+}
+
+.input:focus {
+  box-shadow: 0 0 15px rgb(46, 46, 46);
+}
+
+.input::-webkit-input-placeholder {
+  color: black;
+  font-style: italic;
+}
+
+.input::-moz-placeholder {
+  color: black;
+  font-style: italic;
+}
+
+.input:-ms-input-placeholder {
+  color: black;
+  font-style: italic;
+}
+
+.input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.formControlButtons {
+  display: flex;
+  align-items: center;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formControlButtons label {
+  font-size: 1.1rem;
+  color: #232323;
+  cursor: pointer;
+}
+
+.inputBtn {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #232323;
+  background-color: #fff;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.inputBtn:checked {
+  background-color: #232323;
+  border-color: #ffffff;
+}
+
+.inputBtn:checked::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.inputBtn:hover {
+  background-color: #777777;
+}
+
+.btn {
+  background-color: #232323;
+  color: #ffffff;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-left: 1rem;
+  height: 3rem;
+}
