@@ -1,10 +1,30 @@
 import { useState, useEffect } from "react";
 import styles from "./App.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addExpense } from "./features/expensesSlice";
-
+import { addExpense, deleteExpense } from "./features/expensesSlice"; // Importar a ação de deletar
 import { FaAngleUp, FaAngleDown, FaRegTrashAlt } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+} from "chart.js";
+
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale
+);
 
 const App = () => {
   const [desc, setDesc] = useState("");
@@ -49,6 +69,10 @@ const App = () => {
     setIncome(true);
   };
 
+  const handleDelete = (index) => {
+    dispatch(deleteExpense(index));
+  };
+
   const calcIncome = () => {
     let totalIncome = 0;
     expenses.forEach((expense) => {
@@ -75,6 +99,39 @@ const App = () => {
     return (Number(totalIncome) - Number(totalExpense)).toFixed(2);
   };
 
+  const calcCategoryData = () => {
+    const categories = {};
+
+    expenses.forEach((expense) => {
+      const category = expense.desc || "Outras";
+      categories[category] =
+        (categories[category] || 0) + Number(expense.amount);
+    });
+
+    return categories;
+  };
+
+  const generateLineChartData = () => {
+    const categoryData = calcCategoryData();
+    const labels = Object.keys(categoryData);
+    const data = Object.values(categoryData);
+
+    return {
+      labels: labels,
+      datasets: [
+        {
+          label: "Gastos e Lucros",
+          data: data,
+          fill: false,
+          borderColor: "#232323",
+          tension: 0.1,
+          pointBackgroundColor: "#232323",
+          borderWidth: 2,
+        },
+      ],
+    };
+  };
+
   return (
     <>
       {isMobile ? (
@@ -86,6 +143,7 @@ const App = () => {
           <div className={styles.header}>
             <h1 className={styles.title}>Controle Financeiro</h1>
           </div>
+
           <div className={styles.sections}>
             <section className={styles.income}>
               <div className={styles.titleRow}>
@@ -119,6 +177,7 @@ const App = () => {
               </div>
             </section>
           </div>
+
           <div className={styles.container}>
             <form onSubmit={handleSubmit} className={styles.form}>
               <div className={styles.formControl}>
@@ -170,6 +229,7 @@ const App = () => {
               </button>
             </form>
           </div>
+
           <div className={styles.titleRender}></div>
           <div className={styles.renderContainer}>
             {expenses.map((expense, index) => (
@@ -191,12 +251,15 @@ const App = () => {
                 )}
                 <button
                   className={styles.deleteBtn}
-                  onClick={() => handleSubmit(index)}
+                  onClick={() => handleDelete(index)}
                 >
                   <FaRegTrashAlt />
                 </button>
               </div>
             ))}
+          </div>
+          <div className={styles.chartContainer}>
+            <Line data={generateLineChartData()} />
           </div>
         </>
       )}
