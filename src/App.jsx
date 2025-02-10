@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import styles from "./App.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addExpense } from "./features/expensesSlice";
 
-import { FaAngleUp } from "react-icons/fa";
-import { FaAngleDown } from "react-icons/fa";
+import { FaAngleUp, FaAngleDown, FaRegTrashAlt } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { FaRegTrashAlt } from "react-icons/fa";
 
 const App = () => {
-  const [expenses, setExpenses] = useState([]);
   const [desc, setDesc] = useState("");
   const [amount, setAmount] = useState(0);
   const [income, setIncome] = useState(true);
+
+  const dispatch = useDispatch();
+  const expenses = useSelector((state) => state.expenses.expenses);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -26,11 +28,6 @@ const App = () => {
     setIsMobile(width <= 1222);
   };
 
-  const addExpense = (expense) => {
-    setExpenses([expense, ...expenses]);
-    console.log("Nova transação adicionada: ", expense);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -44,7 +41,9 @@ const App = () => {
       amount,
       type: income ? "income" : "expense",
     };
-    addExpense(newTransaction);
+
+    dispatch(addExpense(newTransaction));
+
     setDesc("");
     setAmount(0);
     setIncome(true);
@@ -76,14 +75,6 @@ const App = () => {
     return (Number(totalIncome) - Number(totalExpense)).toFixed(2);
   };
 
-  const deleteExpense = (index) => {
-    const newExpenses = [...expenses];
-    newExpenses.splice(index, 1);
-    setExpenses(newExpenses);
-
-    console.log("Transação deletada: ", expenses[index]);
-  };
-
   return (
     <>
       {isMobile ? (
@@ -103,7 +94,7 @@ const App = () => {
               </div>
               <div className={styles.incomeContainer}>
                 <div className={styles.incomeItem}>
-                  <span>R$ {calcIncome()} </span>
+                  <span>R$ {calcIncome()}</span>
                 </div>
               </div>
             </section>
@@ -200,7 +191,7 @@ const App = () => {
                 )}
                 <button
                   className={styles.deleteBtn}
-                  onClick={() => deleteExpense(index)}
+                  onClick={() => handleSubmit(index)}
                 >
                   <FaRegTrashAlt />
                 </button>
