@@ -114,7 +114,20 @@ const App = () => {
   const generateLineChartData = () => {
     const categoryData = calcCategoryData();
     const labels = Object.keys(categoryData);
-    const data = Object.values(categoryData);
+
+    const data = labels.map((label) => {
+      const value = categoryData[label];
+      return expenses.some(
+        (expense) => expense.desc === label && expense.type === "expense"
+      )
+        ? -Math.abs(value)
+        : Math.abs(value);
+    });
+
+    const borderColors = labels.map((label) => {
+      const expense = expenses.find((expense) => expense.desc === label);
+      return expense && expense.type === "expense" ? "red" : "green";
+    });
 
     return {
       labels: labels,
@@ -123,9 +136,9 @@ const App = () => {
           label: "Gastos e Lucros",
           data: data,
           fill: false,
-          borderColor: "#232323",
+          borderColor: borderColors,
           tension: 0.1,
-          pointBackgroundColor: "#232323",
+          pointBackgroundColor: borderColors,
           borderWidth: 2,
         },
       ],
@@ -259,7 +272,9 @@ const App = () => {
             ))}
           </div>
           <div className={styles.chartContainer}>
-            <Line data={generateLineChartData()} />
+            <div className={styles.chartLine}>
+              <Line data={generateLineChartData()} />
+            </div>
           </div>
         </>
       )}
