@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "./App.module.css";
-import Header from "./assets/components/Header/Header";
 
 import { FaAngleUp } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
@@ -73,7 +72,9 @@ const App = () => {
 
   return (
     <>
-      <Header title="Controle Financeiro Pessoal" />
+      <div className={styles.header}>
+        <h1 className={styles.title}>Controle Financeiro</h1>
+      </div>
       <div className={styles.sections}>
         <section className={styles.income}>
           <div className={styles.titleRow}>
