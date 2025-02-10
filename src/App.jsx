@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { addExpense, deleteExpense } from "./features/expensesSlice"; // Importar a ação de deletar
 import { FaAngleUp, FaAngleDown, FaRegTrashAlt } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
   Legend,
-  LineElement,
-  PointElement,
+  BarElement,
   CategoryScale,
   LinearScale,
 } from "chart.js";
@@ -20,8 +19,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  LineElement,
-  PointElement,
+  BarElement,
   CategoryScale,
   LinearScale
 );
@@ -111,38 +109,68 @@ const App = () => {
     return categories;
   };
 
-  const generateLineChartData = () => {
+  const generateBarChartData = () => {
     const categoryData = calcCategoryData();
     const labels = Object.keys(categoryData);
 
-    const data = labels.map((label) => {
+    const incomeData = labels.map((label) => {
+      const value = categoryData[label];
+      return expenses.some(
+        (expense) => expense.desc === label && expense.type === "income"
+      )
+        ? Math.abs(value)
+        : 0;
+    });
+
+    const expenseData = labels.map((label) => {
       const value = categoryData[label];
       return expenses.some(
         (expense) => expense.desc === label && expense.type === "expense"
       )
         ? -Math.abs(value)
-        : Math.abs(value);
-    });
-
-    const borderColors = labels.map((label) => {
-      const expense = expenses.find((expense) => expense.desc === label);
-      return expense && expense.type === "expense" ? "red" : "green";
+        : 0;
     });
 
     return {
       labels: labels,
       datasets: [
         {
-          label: "Gastos e Lucros",
-          data: data,
-          fill: false,
-          borderColor: borderColors,
-          tension: 0.1,
-          pointBackgroundColor: borderColors,
-          borderWidth: 2,
+          label: "Entradas",
+          data: incomeData,
+          backgroundColor: "#28a745",
+          borderColor: "#28a745",
+          borderWidth: 1,
+        },
+        {
+          label: "Saídas",
+          data: expenseData,
+          backgroundColor: "#dc3545",
+          borderColor: "#dc3545)",
+          borderWidth: 1,
         },
       ],
     };
+  };
+
+  const barChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      tooltip: {
+        mode: "index",
+        intersect: false,
+      },
+    },
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true,
+      },
+    },
   };
 
   return (
@@ -273,7 +301,7 @@ const App = () => {
           </div>
           <div className={styles.chartContainer}>
             <div className={styles.chartLine}>
-              <Line data={generateLineChartData()} />
+              <Bar data={generateBarChartData()} options={barChartOptions} />
             </div>
           </div>
         </>
