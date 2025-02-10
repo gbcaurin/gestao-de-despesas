@@ -32,12 +32,7 @@ section {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   text-align: center;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ccc;
 }
 
 .titleRow {
@@ -195,4 +190,86 @@ input[type="number"]::-webkit-outer-spin-button {
   transition: all 0.3s ease-in-out;
   margin-left: 1rem;
   height: 3rem;
+}
+
+.renderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.renderItem {
+  display: grid;
+  grid-template-columns: 1fr 120px 40px 40px;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  width: 65%;
+  border: 1px solid #ccc;
+  gap: 1rem;
+}
+
+.renderItem h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.renderItem h3:nth-child(1) {
+  text-align: left;
+}
+
+.renderItem h3:nth-child(2) {
+  text-align: right;
+}
+
+.renderItem span {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.up {
+  color: #28a745;
+  border: 1px solid #28a745;
+  border-radius: 50%;
+}
+
+.down {
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  border-radius: 50%;
+}
+
+.up,
+.down {
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteBtn {
+  background-color: #232323;
+  color: #ffffff;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.deleteBtn:hover {
+  background-color: #dc3545;
 }

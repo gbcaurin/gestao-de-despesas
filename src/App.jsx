@@ -5,6 +5,7 @@ import Header from "./assets/components/Header/Header";
 import { FaAngleUp } from "react-icons/fa";
 import { FaAngleDown } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 const App = () => {
   const [expenses, setExpenses] = useState([]);
@@ -13,7 +14,7 @@ const App = () => {
   const [income, setIncome] = useState(true);
 
   const addExpense = (expense) => {
-    setExpenses([...expenses, expense]);
+    setExpenses([expense, ...expenses]);
     console.log("Nova transação adicionada: ", expense);
   };
 
@@ -60,6 +61,14 @@ const App = () => {
     const totalIncome = calcIncome();
     const totalExpense = calcExpense();
     return (Number(totalIncome) - Number(totalExpense)).toFixed(2);
+  };
+
+  const deleteExpense = (index) => {
+    const newExpenses = [...expenses];
+    newExpenses.splice(index, 1);
+    setExpenses(newExpenses);
+
+    console.log("Transação deletada: ", expenses[index]);
   };
 
   return (
@@ -148,6 +157,30 @@ const App = () => {
             Adicionar
           </button>
         </form>
+      </div>
+      <div className={styles.titleRender}></div>
+      <div className={styles.renderContainer}>
+        {expenses.map((expense, index) => (
+          <div key={index} className={styles.renderItem}>
+            <h3>{expense.desc}</h3>
+            <h3 style={{ color: expense.type === "expense" ? "red" : "green" }}>
+              {expense.type === "expense"
+                ? `- R$ ${expense.amount}`
+                : `R$ ${expense.amount}`}
+            </h3>
+            {expense.type === "expense" ? (
+              <FaAngleDown className={styles.down} />
+            ) : (
+              <FaAngleUp className={styles.up} />
+            )}
+            <button
+              className={styles.deleteBtn}
+              onClick={() => deleteExpense(index)}
+            >
+              <FaRegTrashAlt />
+            </button>
+          </div>
+        ))}
       </div>
     </>
   );
