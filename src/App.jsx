@@ -6,11 +6,6 @@ import { FaAngleUp, FaAngleDown, FaRegTrashAlt } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import { Bar } from "react-chartjs-2";
 import {
-  getExpensesFromFirestore,
-  addExpenseToFirestore,
-  deleteExpenseFromFirestore,
-} from "./firebaseService";
-import {
   Chart as ChartJS,
   Title,
   Tooltip,
@@ -46,21 +41,12 @@ const App = () => {
     return () => window.removeEventListener("resize", checkResolution);
   }, []);
 
-  useEffect(() => {
-    const fetchExpenses = async () => {
-      const data = await getExpensesFromFirestore();
-      dispatch(addExpense(data));
-    };
-
-    fetchExpenses();
-  }, [dispatch]);
-
   const checkResolution = () => {
     const width = window.innerWidth;
     setIsMobile(width <= 1222);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!desc || !amount) {
@@ -74,7 +60,6 @@ const App = () => {
       type: income ? "income" : "expense",
     };
 
-    await addExpenseToFirestore(newTransaction);
     dispatch(addExpense(newTransaction));
 
     setDesc("");
@@ -82,9 +67,8 @@ const App = () => {
     setIncome(true);
   };
 
-  const handleDelete = async (id) => {
-    await deleteExpenseFromFirestore(id);
-    dispatch(deleteExpense(id));
+  const handleDelete = (index) => {
+    dispatch(deleteExpense(index));
   };
 
   const calcIncome = () => {
