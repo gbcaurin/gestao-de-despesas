@@ -303,21 +303,6 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: #dc3545;
 }
 
-.unsupportedDevice {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #f44336;
-  color: white;
-  padding: 1rem;
-  border-radius: 10px;
-  font-size: 1.5rem;
-  text-align: center;
-  z-index: 100;
-}
-
 .chartContainer {
   width: 100%;
   height: 300px;
@@ -414,5 +399,189 @@ input[type="number"]::-webkit-outer-spin-button {
 
   .chartLine {
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 1419px) {
+  .sections {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .formControl {
+    margin: 0.5rem;
+    width: 100%;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .formControlButtons label {
+    font-size: 1rem;
+  }
+
+  .controlForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn {
+    margin-top: 1rem;
+  }
+
+  .renderContainer {
+    width: 100%;
+  }
+
+  .renderItem {
+    width: 100%;
+  }
+
+  .chartContainer {
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .chartLine {
+    width: 100%;
+  }
+
+  .titleRow h2 {
+    font-size: 1.2rem;
+  }
+
+  .titleRow h3 {
+    font-size: 1rem;
+  }
+
+  .renderItem h3 {
+    font-size: 0.9rem;
+  }
+
+  .renderItem span {
+    font-size: 1.2rem;
+  }
+
+  .incomeItem,
+  .expenseItem,
+  .totalContainer span {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .header {
+    height: 15rem;
+  }
+
+  .title {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+  }
+
+  .container {
+    flex-direction: column;
+    height: 20rem;
+  }
+
+  .sections {
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+
+  .form {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .formControl {
+    margin: 0.5rem;
+    width: 100%;
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .formControlButtons label {
+    font-size: 1rem;
+  }
+
+  .controlForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn {
+    margin-top: 1rem;
+  }
+
+  .renderContainer {
+    width: 100%;
+  }
+
+  .renderItem {
+    width: 100%;
+  }
+
+  .chartContainer {
+    flex-direction: column;
+    margin-top: 0;
+  }
+
+  .chartLine {
+    width: 100%;
+  }
+
+  .titleRow h2 {
+    font-size: 1.2rem;
+  }
+
+  .titleRow h3 {
+    font-size: 1rem;
+  }
+
+  .renderItem h3 {
+    font-size: 0.9rem;
+  }
+
+  .renderItem span {
+    font-size: 1.2rem;
+  }
+
+  .incomeItem,
+  .expenseItem,
+  .totalContainer span {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .header {
+    height: 15rem;
   }
 }
